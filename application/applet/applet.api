@@ -3,7 +3,7 @@ syntax = "v1"
 type (
 	Token {
 		AccessToken  string `json:"access_token"`
-		AccessExpire int64  `json:"access_expire"`
+		AccessExpire int64  `json:"access_expire"`//token 过期时间
 	}
 	RegisterRequest {
 		Name             string `json:"name"`
@@ -11,6 +11,7 @@ type (
 		Password         string `json:"password"`
 		VerificationCode string `json:"verification_code"`
 	}
+	// 注册返回一个用户的id和token
 	RegisterResponse {
 		UserId int64 `json:"user_id"`
 		Token  Token `json:"token"`
@@ -18,12 +19,14 @@ type (
 	VerificationRequest {
 		Mobile string `json:"mobile"`
 	}
+	// 可以不返回任何东西
 	VerificationResponse {
 	}
 	LoginRequest {
 		Mobile           string `json:"mobile"`
 		VerificationCode string `json:"verification_code"`
 	}
+	// 登录和注册返回的内容一样
 	LoginResponse {
 		UserId int64 `json:"userId"`
 		Token  Token `json:"token"`
@@ -31,10 +34,11 @@ type (
 	UserInfoResponse {
 		UserId   int64  `json:"user_id"`
 		Username string `json:"username"`
-		Avatar   string `json:"avatar"`
+		Avatar   string `json:"avatar"`//头像
 	}
 )
 
+// 访问地址的前缀
 @server (
 	prefix: /v1
 )
@@ -47,10 +51,11 @@ service applet-api {
 	post /login (LoginRequest) returns (LoginResponse)
 }
 
+// 用户信息的验证
 @server (
 	prefix: /v1/user
-	signature: true
-	jwt: Auth
+	signature: true//签名
+	jwt: Auth//jwt验证
 )
 service applet-api {
 	@handler UserInfoHandler

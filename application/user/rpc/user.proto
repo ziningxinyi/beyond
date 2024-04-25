@@ -18,6 +18,7 @@ message RegisterRequest {
   string password = 4;
 }
 
+// token不需要返回了  
 message RegisterResponse {
   int64 userId = 1;
 }

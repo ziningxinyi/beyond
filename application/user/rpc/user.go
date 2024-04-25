@@ -12,6 +12,7 @@ import (
 	"beyond/pkg/interceptors"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	// 这个一定要修改, 下面也要改, 大坑
 	cs "github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
